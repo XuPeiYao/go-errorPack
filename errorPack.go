@@ -88,3 +88,7 @@ func (ep *ErrorPack[T]) Error() string {
 		return fmt.Sprintf("%s[%s]\r\n%s%s%s", "ErrorPack", getType(ep.Data), dataStr, ep.InnerError.Error(), stackTrace)
 	}
 }
+
+func Wrap[T any](err error, data *T) *ErrorPack[T] {
+	return NewErrorPack[T](err, *data)
+}
